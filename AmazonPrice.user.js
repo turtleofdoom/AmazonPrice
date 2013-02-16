@@ -30,18 +30,22 @@ function insertPrice(str) {
 	    var price = responseHTML.getElementById("actualPriceValue").textContent;
 	    if (window.location.hostname.match(/\.ca$/)) {
 	    	$("#mycontent a").html("or buy for <b class='priceLarge'>USD"+price+"</b> on Amazon.com");
-	    }
+	    } 
+	    if (window.location.hostname.match(/\.com$/)) {
+	    	$("#mycontent a").html("or buy for <b class='priceLarge'>"+price+"</b> on Amazon.ca");
+	    } 
 	  }
 	});
 }
 
 if (window.location.hostname.match(/\.ca$/)) {
 	$("#actualPriceContent").append("<span id='mycontent'><a href="+getAmazonDotComURL()+">View on Amazon.com</a></span>");
+	insertPrice(getAmazonDotComURL());
 }
 
 if (window.location.hostname.match(/\.com$/)) {
-	$("#actualPriceContent").append("<span><a href="+getAmazonDotCaURL()+">View on Amazon.ca</a></span>");
+	$("#actualPriceContent").append("<span id='mycontent'><a href="+getAmazonDotCaURL()+">View on Amazon.ca</a></span>");
 	$(".priceLarge, .price, .listprice").prepend("USD");
+	insertPrice(getAmazonDotCaURL());
 }
 
-insertPrice(getAmazonDotComURL());
